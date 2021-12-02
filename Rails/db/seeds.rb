@@ -1,2 +1,2 @@
-require './seeds/users'
-require './seeds/posts'
+require './db/seeds/users'
+require './db/seeds/posts'
