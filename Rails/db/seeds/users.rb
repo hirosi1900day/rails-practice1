@@ -6,5 +6,4 @@ puts 'Start inserting seed "users" ...'
         password: "password",
         password_confirmation: "password"        
     )
-    
 end
