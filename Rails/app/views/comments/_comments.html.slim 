@@ -1,0 +1,7 @@
+div.row.no-gutters
+  .col-2
+    div
+      = comment.user.name
+      = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+  .col-10
+    = comment.body
