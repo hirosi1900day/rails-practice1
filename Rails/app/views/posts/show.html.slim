@@ -26,8 +26,9 @@
         .col-10
           = simple_format(@post.body)
     hr.m-0
-    = render comments/comments, comment: @comments
+    = if @comments.present?
+      = render 'comments/comments', comments: @comments
       
     hr.m-0
     .post-comment.p-3
-      = render commens/form, {comment: @commnet, post: @post}
+      = render 'comments/form', {comment: @comment, post: @post}

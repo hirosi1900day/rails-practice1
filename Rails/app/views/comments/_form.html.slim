@@ -2,5 +2,3 @@
 = form_with model: [post, comment], remote: true do |f|
   = f.text_field :body, class: 'form-control input-comment-body', placeholder: 'コメント'
   = f.submit '投稿', class: 'btn btn-primary btn-raised'
-
-= form_with model [post, comment], remote: true do |f|
