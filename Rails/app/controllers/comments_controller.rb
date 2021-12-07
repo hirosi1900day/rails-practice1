@@ -2,7 +2,8 @@ class CommentsController < ApplicationController
     before_action :require_login, only: %i[create, edit, update, destroy]
 
     def create
-        @commnet = current_user.comments.build(comment_params).save
+        @comment = current_user.comments.build(comment_params)
+        @comment.save
     end
 
     def edit 
@@ -10,12 +11,12 @@ class CommentsController < ApplicationController
     end
 
     def update
-        @comment = Comemnt.find(parmas[:id])
+        @comment = current_user.comments.find(params[:id])
         @comment.update(comment_update_params)
     end
 
     def destroy
-        @comment = Comment.find(params[:id])
+        @comment = current_user.comments.find(params[:id])
         @comment.destroy!
     end
 

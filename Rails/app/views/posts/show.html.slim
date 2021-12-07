@@ -25,10 +25,9 @@
           = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
         .col-10
           = simple_format(@post.body)
-    hr.m-0
-    = if @comments.present?
+      hr
+      / コメント一覧
       = render 'comments/comments', comments: @comments
-      
     hr.m-0
     .post-comment.p-3
-      = render 'comments/form', {comment: @comment, post: @post}
+      = render 'comments/form', post: @post, comment: @comment
