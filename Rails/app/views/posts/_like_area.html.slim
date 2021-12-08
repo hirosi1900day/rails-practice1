@@ -1,0 +1,3 @@
+div id="like-area-#{post.id}"
+  - if current_user&.like?(post)
+    = form_with model
