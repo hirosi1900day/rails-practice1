@@ -1,2 +1,2 @@
-= link_to relationship_path(Relationship.find_by(followed_id: user.id, user_id: current_user.id)), method: :delete, class: '', remote: true do 
+= link_to relationship_path(current_user.active_relationships.find_by(followed_id: user.id)), method: :delete, class: 'btn btn-warning btn-raised', remote: true do 
 フォローを解除する

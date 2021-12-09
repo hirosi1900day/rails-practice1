@@ -1,10 +1,12 @@
 class RelationshipsController < ApplicationController
+    before :require_login, only: %i[:create :destroy]
     def create
-        true
+        @user = User.find(params[:followed_id])
+        current_user.follow(@user)
     end
 
     def destroy
-        true
+        @user = Relationship.find(params[:id]).followed
+        current_user.unfollow(@user)
     end
-
 end
