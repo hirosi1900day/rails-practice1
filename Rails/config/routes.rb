@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :comments, shallow: true
   end
 
-  resources :likes only: %i[create destroy]
+  resources :likes, only: %i[create destroy]
   resources :users, only: %i[new create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

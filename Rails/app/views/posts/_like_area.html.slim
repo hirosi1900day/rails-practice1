@@ -1,3 +1,5 @@
-div id="like-area-#{post.id}"
-  - if current_user&.like?(post)
-    = form_with model
+div id="like_area-#{post.id}"
+  - if current_user.like?(post)
+    = render 'unlike', post: post
+  - else
+    = render 'like', post: post
