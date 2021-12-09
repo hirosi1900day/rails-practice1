@@ -1,0 +1,6 @@
+= user.name 
+  =link_to user_path(user)vdo 
+    = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+    = user.name
+  = render 'uses/follow_area', user: user 
+  

@@ -21,11 +21,18 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_posts, through: :likes, source: :post
   #フォロー関係のリレーション
-  has_many :relationships, dependent: :destroy
-  has_many :followings, through: :relationships, source: :follow
-  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
-  has_mamy :followers, through: :reverse_of_relationships, source: :user
+  has_many :active_relationships, class_name:
+  'Relationship',
+  foreign_key: 'follower_id',
+  dependent: :destroy
+  has_many :passive_relationships, class_name:
+  'Relationship',
+  foreign_key: 'followed_id',
+  dependent: :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
 
+  scope :recent, ->(count) { order(created_at: :desc).limit(count) }
 
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
@@ -50,15 +57,20 @@ class User < ApplicationRecord
   #フォロー関係
   def follow(other_user)
     unless self == other_user
-      followings.append(other_user)
+      following.append(other_user)
     end
   end
 
   def unfollow(other_user)
-    followings.destroy(other_user)
+    following.destroy(other_user)
   end
 
   def following?(other_user)
-    followings.include?(other_user)
+    following.include?(other_user)
   end
+
+  def feed 
+    Post.where(user_id: following_ids << id)
+  end
+
 end
