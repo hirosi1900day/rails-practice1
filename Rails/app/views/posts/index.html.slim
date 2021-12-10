@@ -19,5 +19,6 @@
             .user.mb-3
               = render @users
           .card-footer
-            = link_to users_path, method: :get, '全てのユーザーを見る'
+            = link_to users_path do
+              button 全てのユーザーを見る
      

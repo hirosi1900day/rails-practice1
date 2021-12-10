@@ -7,7 +7,7 @@ class PostsController < ApplicationController
           else
             Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
           end
-        @user = User.recent(5)
+        @users = User.recent(5)
     end
 
     def new 

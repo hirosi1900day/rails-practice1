@@ -1,5 +1,7 @@
-div id="like_area-#{post.id}"
-  - if current_user.like?(post)
-    = render 'unlike', post: post
-  - else
-    = render 'like', post: post
+
+- if current_user&.present?
+    div id="like_area-#{post.id}"
+      - if current_user&.like?(post)
+        = render 'unlike', post: post
+      - else
+        = render 'like', post: post
