@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
     before_action :require_login, only: %i[new create edit update destroy]
-    before_action :set_search_posts_form, only: :search
-
+    
     def index
         @posts = if current_user
             current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)

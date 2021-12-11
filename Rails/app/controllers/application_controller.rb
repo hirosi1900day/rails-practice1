@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :set_search_posts_form
+    
     def not_authenticated
         redirect_to login_path, warning: 'ログインしてください'
     end      
