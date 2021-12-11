@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   root 'posts#index'
   get 'login', to: 'user_sessions#new'  
   post 'login', to: 'user_sessions#create'  
-  delete 'logout', to: 'user_sessions#destroy'  
+  delete 'logout', to: 'user_sessions#destroy' 
+  
+  #post検索用path
+  get 'posts/search', to: 'posts#search'
 
   resources 'posts' do
     resources :comments, shallow: true

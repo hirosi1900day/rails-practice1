@@ -2,6 +2,7 @@
   .row
     .col-md-8.col-12
       - if @posts.present?
+        = render 'posts/search'
         = render @posts
         = paginate @posts
       - else 

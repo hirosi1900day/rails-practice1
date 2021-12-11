@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
     before_action :require_login, only: %i[new create edit update destroy]
+    before_action :set_search_posts_form, only: :search
 
     def index
         @posts = if current_user
@@ -50,6 +51,10 @@ class PostsController < ApplicationController
         redirect_to posts_path, success: '投稿の削除に成功しました'
     end
 
+    def search
+        @posts = @search_form.search.includes(:user).page(params[:page])
+    end
+    
     private 
 
     def post_params
