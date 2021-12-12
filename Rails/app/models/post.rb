@@ -20,10 +20,15 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   mount_uploaders :images, PostImageUploader
   serialize :images, JSON
 
   validates :images, presence: true
   validates :body, presence: true, length: {maximum: 1000}
+
+  scope :body_contain, ->(word) { where('posts.body LIKE ?', "%#{word}%") }
+  scope :comment_body_contain, ->(word) { joins(:comments).where('comments.body LIKE ?', "%#{word}%") }
+  scope :name_contain, ->(word) {joins(:user).where('name LIKE ?', "%#{word}%")}
 end

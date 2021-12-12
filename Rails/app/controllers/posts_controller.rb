@@ -1,8 +1,14 @@
 class PostsController < ApplicationController
     before_action :require_login, only: %i[new create edit update destroy]
+    before_action :set_search_posts_form, only: :search
 
     def index
-        @posts = Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
+        @posts = if current_user
+            current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)
+          else
+            Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
+          end
+        @users = User.recent(5)
     end
 
     def new 
@@ -45,6 +51,10 @@ class PostsController < ApplicationController
         redirect_to posts_path, success: '投稿の削除に成功しました'
     end
 
+    def search
+        @posts = @search_form.search.includes(:user).page(params[:page])
+    end
+    
     private 
 
     def post_params
