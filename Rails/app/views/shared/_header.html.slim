@@ -3,6 +3,9 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   = render 'posts/search', search_form: @search_form
   - if logged_in?
     = link_to 'ログアウト', logout_path, class: 'nav-link', method: :delete
+    li.nav-item
+      = link_to user_path(current_user), class: 'nav-link' do
+        = icon 'far', 'user', class: 'fa-lg'
     = link_to '新規投稿',  new_post_path, class: 'nav-link'
   - else
     div = link_to 'ログイン', login_path

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   
   #post検索用path
   get 'posts/search', to: 'posts#search'
+  #userプロフィール編集用path
+  namespace :mypage do
+    resources :account, only: %i[edit create]
+  end
 
   resources 'posts' do
     resources :comments, shallow: true
