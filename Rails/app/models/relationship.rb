@@ -20,4 +20,12 @@ class Relationship < ApplicationRecord
     validates :follower_id, presence: true
     validates :followed_id, presence: true
     validates :follower_id, uniqueness: { scope: :followed_id }
+    has_one :activities, as: :subject, dependent: :destroy
+
+    after_create_commit :create_activities
+
+    private
+    def create_activities
+        Activity.create(subject: self, user: followed, action_type: :followed_me)
+    end
 end

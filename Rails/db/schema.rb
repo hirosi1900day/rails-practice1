@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_071608) do
+ActiveRecord::Schema.define(version: 2021_12_14_122707) do
+
+  create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "subject_type"
+    t.bigint "subject_id"
+    t.bigint "user_id"
+    t.integer "action_type", null: false
+    t.boolean "read", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_type", "subject_id"], name: "index_activities_on_subject_type_and_subject_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "post_id"
@@ -30,6 +42,18 @@ ActiveRecord::Schema.define(version: 2021_12_13_071608) do
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id", "post_id"], name: "index_likes_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "subject_type"
+    t.bigint "subject_id"
+    t.bigint "user_id"
+    t.integer "action_type", null: false
+    t.boolean "read", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject_type_and_subject_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -62,9 +86,11 @@ ActiveRecord::Schema.define(version: 2021_12_13_071608) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "activities", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "posts", "users"
 end
