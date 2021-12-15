@@ -1,5 +1,6 @@
 h1 = link_to 'AppName', root_path
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  = render 'posts/search', search_form: @search_form
   - if logged_in?
     = link_to 'ログアウト', logout_path, class: 'nav-link', method: :delete
     = link_to '新規投稿',  new_post_path, class: 'nav-link'
