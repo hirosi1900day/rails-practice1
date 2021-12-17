@@ -22,7 +22,7 @@
 class Like < ApplicationRecord
   belongs_to :user
   belongs_to :post
-  has_one :activities, as: :subject, dependent: :destroy
+  has_one :activities, as: :subject
   validates :user_id, uniqueness: { scope: :post_id }
 
   after_create_commit :create_activities

@@ -21,6 +21,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Activity < ApplicationRecord
+  include Rails.application.routes.url_helpers
   belongs_to :subject, polymorphic: true
   belongs_to :user
 
