@@ -84,6 +84,7 @@ group :development do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'letter_opener_web'
+  gem 'sidekiq', '~> 5.0'
 end
 
 group :test do
