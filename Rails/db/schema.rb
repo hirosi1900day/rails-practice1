@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_14_122707) do
+ActiveRecord::Schema.define(version: 2021_12_18_131729) do
 
   create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "subject_type"
@@ -44,18 +44,6 @@ ActiveRecord::Schema.define(version: 2021_12_14_122707) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "subject_type"
-    t.bigint "subject_id"
-    t.bigint "user_id"
-    t.integer "action_type", null: false
-    t.boolean "read", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject_type_and_subject_id"
-    t.index ["user_id"], name: "index_notifications_on_user_id"
-  end
-
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.string "images", null: false
@@ -83,6 +71,9 @@ ActiveRecord::Schema.define(version: 2021_12_14_122707) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+    t.boolean "notification_on_comment", default: true
+    t.boolean "notification_on_like", default: true
+    t.boolean "notification_on_follow", default: true
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -91,6 +82,5 @@ ActiveRecord::Schema.define(version: 2021_12_14_122707) do
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
-  add_foreign_key "notifications", "users"
   add_foreign_key "posts", "users"
 end
