@@ -85,6 +85,7 @@ group :development do
   gem 'pry-rails'
   gem 'letter_opener_web'
   gem 'sidekiq', '~> 5.0'
+  gem 'meta-tags'
 end
 
 group :test do
