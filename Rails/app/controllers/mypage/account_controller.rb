@@ -1,9 +1,7 @@
 class Mypage::AccountController < ApplicationController
     before_action :require_login
     def edit
-        if current_user.id.to_s == params[:id].to_s
-            return @user = current_user
-        end
+        @user = current_user
     end
     
     def create 
@@ -14,5 +12,4 @@ class Mypage::AccountController < ApplicationController
     def update_params
         params.require(:user).permit(:name, :avatar)
     end
-
 end
