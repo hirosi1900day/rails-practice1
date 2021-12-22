@@ -23,8 +23,10 @@
       .row.no-gutters
         .col-2
           = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
-        .col-10
+        .col-9
           = simple_format(@post.body)
+        .col-1 
+          = render 'like_area', post: @post
       hr
       / コメント一覧
       = render 'comments/comments', comments: @comments
