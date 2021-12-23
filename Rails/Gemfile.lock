@@ -442,7 +442,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   config
-  factory_bot_rails (~> 5.0)
+  factory_bot_rails
   faker
   font-awesome-sass
   image_magick
@@ -460,7 +460,7 @@ DEPENDENCIES
   rails (~> 5.2.6)
   rails-i18n (~> 5.1)
   redis-rails
-  rspec-rails (~> 3.8)
+  rspec-rails
   rubocop
   rubocop-rails
   sass-rails (~> 5.0)

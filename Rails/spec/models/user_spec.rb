@@ -2,17 +2,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
     describe "バリデーション 異常系" do
-        it 'nameが必須である' do
-            user = build(:user, name: nil)
-            user.valid?
-            except(user.errors[:name]).to include('を入力してください')
-        end
-
-        it 'メールアドレスが必須である' do
-            user = build(:user, email: nil)
-            user.valid?
-            except(user.errors[:email]).to include('を入力してください')
-        end
 
         it '登録できないこと' do
             user = User.new
@@ -23,15 +12,8 @@ RSpec.describe User, type: :model do
             user = create(:user)
             other_user = build(:user, email: user.email)
             other_user.valid? 
-            expect(other_user.errors[:email]).to include('すでに存在しています')  
+            expect(other_user.errors[:email]).to include('はすでに存在します')  
         end
-
-        it 'ユーザー名の一意性' do
-            user = create(:user)
-            other_user = create(:user, name: user.name)
-            other_user.valid?
-            expect(other_user.errors[:name]).to include('すでに存在しています')  
-        end  
     end
 
     describe "インスタンスメソッド" do
@@ -54,12 +36,12 @@ RSpec.describe User, type: :model do
 
         context "likeの確認" do
             it 'likeできること' do
-                expect(user_a.like(post_by_user_b)).to change { Like.count }.by(1)
+                expect { user_a.like(post_by_user_b) }.to change { Like.count }.by(1)
             end 
 
             it 'likeが解除できること' do
                 user_a.like(post_by_user_b)
-                expect(user_a.unlike(post_by_user_b)).to change { Like.count }.by(-1)
+                expect { user_a.unlike(post_by_user_b) }.to change { Like.count }.by(-1)
             end
 
             it 'お気に入りしているか確認できる お気に入りしている場合' do
@@ -74,21 +56,21 @@ RSpec.describe User, type: :model do
 
         context "フォロメソッド" do
             it 'フォローができること' do
-                expect(user_a.follow(user_b)).to change { Relationship.count }.by(1)     
+                expect { user_a.follow(user_b) }.to change { Relationship.count }.by(1)     
             end
 
             it 'フォローが解除できること' do
-                user_a.follow(user_c)
-                expect(user_a.unfollow(user_c)).to change { Relationship.count }.by(-1)
+                user_a.follow(user_b)
+                expect { user_a.unfollow(user_b) }.to change { Relationship.count }.by(-1)
             end
 
             it 'フォローしている場合 true' do
                 user_a.follow(user_b)
-                expect(user_a.following?(user_b)).to eq true
+                expect(user_a.followings?(user_b)).to eq true
             end
 
             it 'フォローしていない場合 false' do
-                expect(user_a.following?(user_c)).to eq false
+                expect(user_a.followings?(user_c)).to eq false
             end
         end   
         
