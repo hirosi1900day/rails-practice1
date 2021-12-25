@@ -7,11 +7,17 @@ services:
       - ./Rails:/app
     ports:
       - 3000:3000
+    environment:
+      - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
     depends_on:
       - db 
       - redis
     tty: true
     stdin_open: true
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+    logging:
+      driver: none
   db:
     image: mysql:5.7
     volumes:
