@@ -65,10 +65,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  config.before(:each, type: :system) do
-    driven_by :selenium, using: :chrome, screen_size: [1280, 960]
-  end
-  
   config.include FactoryBot::Syntax::Methods
   config.include SystemHelper, type: :system
 

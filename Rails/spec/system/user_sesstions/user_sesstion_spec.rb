@@ -7,11 +7,9 @@ RSpec.describe 'ログイン・ログアウト', type: :system do
         context '認証情報が正しい場合' do
             it 'ログインができる' do
                 visit '/login'
-                fill_in'email', with: user.email
-                fill_in'password', with: user.password
-                sleep 2
+                fill_in 'email', with: user.email
+                fill_in 'password', with: user.password
                 click_button'ログイン'
-                sleep2
                 expect(current_path).to eq(root_path)  
             end
         end   
@@ -19,14 +17,11 @@ RSpec.describe 'ログイン・ログアウト', type: :system do
         context "入力に誤りがある" do
             it 'ログインできない' do
                 visit '/login'
-                fill_in'email', with: user.email
-                fill_in'password', with: '1234'
-                sleep2
+                fill_in 'email', with: user.email
+                fill_in 'password', with: '1234'
                 click_button'ログイン'
-                sleep
                 expect(current_path).not_to eq(root_path) 
                 expect(current_path).to eq(login_path)
-                expect 
             end
         end
     end
@@ -38,7 +33,7 @@ RSpec.describe 'ログイン・ログアウト', type: :system do
         it 'ログアウトの確認' do
             click_button'ログアウト'
             expect(current_path).to eq login_path
-            expect(response.body).to have_contain 'ログアウトpしました'
+            expect(page).to have_content 'ログアウトしました'
         end
     end
 end

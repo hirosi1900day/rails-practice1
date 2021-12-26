@@ -12,12 +12,14 @@ services:
     depends_on:
       - db 
       - redis
+      - chrome
     tty: true
     stdin_open: true
-  selenium_chrome:
-    image: selenium/standalone-chrome-debug
-    logging:
-      driver: none
+  chrome:
+    image: selenium/standalone-chrome-debug:latest
+    ports:
+      - 4444:4444
+      - 5700:5900
   db:
     image: mysql:5.7
     volumes:
