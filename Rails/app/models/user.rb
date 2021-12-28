@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :like_posts, through: :likes, source: :post
+
   #フォロー関係のリレーション
   has_many :active_relationships, class_name:
   'Relationship',
@@ -39,7 +40,11 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :activities, dependent: :destroy
-
+  #chat関連
+  has_many :chatroom_users, dependent: :destroy
+  has_many :chatrooms, through: :chatroom_users
+  has_many :chatroom_message, dependent: :destroy
+  
   scope :recent, ->(count) { order(created_at: :desc).limit(count) }
 
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
@@ -80,5 +85,4 @@ class User < ApplicationRecord
   def feed 
     Post.where(user_id: following_ids << id)
   end
-
 end
