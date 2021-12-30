@@ -1,0 +1,9 @@
+
+= form_with model: message, url: chatroom_messages_path(chatroom), method: :post, remote: true do |f|
+  = render 'shared/error_messages', object: message
+  = f.label :body
+  = f.text_field :body, class: 'form-control mb-3 input-message-body', required: true
+  - if message.new_record?
+    = f.submit '投稿', class: 'btn btn-primary btn-raised'
+  - else
+    = f.submit '更新', class: 'btn btn-primary btn-raised'

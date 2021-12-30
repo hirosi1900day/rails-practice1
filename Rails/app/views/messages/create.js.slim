@@ -1,0 +1,6 @@
+- if @message.errors.present?
+  | alert("#{@message.errors.full_messages.join('\n')}");
+- else
+  | $('.messages-box').prepend("#{j render('messages/message', message: @message)}");
+  | $('.input-message-body').val('');
+  

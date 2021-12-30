@@ -1,4 +1,4 @@
-class ChatRoom < ApplicationRecord
+class Chatroom < ApplicationRecord
     has_many :chatroom_messages, dependent: :destroy
     has_many :chatroom_users, dependent: :destroy
     has_many :users, through: :chatroom_users
@@ -10,10 +10,14 @@ class ChatRoom < ApplicationRecord
             chatroom.users = users
             chatroom.save
         end
-        chatroom
     end
 
     def users_excluding(user)
         users.reject { |u| u == user }
     end
+    
+    def set_read_datetime(user)
+        self.chatroom_users.find_by(user_id: user.id).update(last_read_at: Time.now)
+    end
+
 end

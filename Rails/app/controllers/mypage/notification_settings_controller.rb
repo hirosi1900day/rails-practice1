@@ -1,13 +1,10 @@
 class Mypage::NotificationSettingsController < ApplicationController
     before_action :require_login
     def edit 
-        @user = current_user
+        @user = User.find(current_user.id)
     end
 
     def update 
-        
-        binding.pry
-        
         if current_user.update(notification_setting_params)
             flash.now[:success] = '設定を更新しました'
             render :edit
@@ -17,9 +14,6 @@ class Mypage::NotificationSettingsController < ApplicationController
     private 
 
     def notification_setting_params
-        
-        binding.pry
-        
         params.require(:user).permit(:notification_on_comment, :notification_on_like, :notification_on_follow)
     end
 

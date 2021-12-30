@@ -20,7 +20,7 @@
           .modal-body
             ul.list-unstyled
 
-              = f.collection_check_boxes :user_ids, current_user.following, :id, :username do |b|
+              = f.collection_check_boxes :user_ids, current_user.following, :id, :name do |b|
                 .mb-3
                   = b.label do
                     = b.check_box class: 'mr-1'
