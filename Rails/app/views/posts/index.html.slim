@@ -1,9 +1,12 @@
 .container
   .row
     .col-md-8.col-12
-      = render @posts
-    
-      = paginate @posts
+      - if @posts.present?
+        = render 'posts/search', search_form: @search_form
+        = render @posts
+        = paginate @posts
+      - else 
+        div 投稿が一件もありません
     .col-md-4.col-12
       - if logged_in?
         .profile-box.mb-3
@@ -15,17 +18,8 @@
             | ユーザー
           .card-body
             .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー京介
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー寅泰
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー常松
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミーまこと
+              = render @users
           .card-footer
-            = link_to 'すべて見る', '#'
+            = link_to users_path do
+              button 全てのユーザーを見る
      
