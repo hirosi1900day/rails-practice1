@@ -21,7 +21,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-    describe "バリデーション 異常系" do
+    describe "バリデーション" do
 
         it '登録できないこと' do
             user = User.new
@@ -35,6 +35,7 @@ RSpec.describe User, type: :model do
             expect(other_user.errors[:email]).to include('はすでに存在します')  
         end
     end
+
 
     describe "インスタンスメソッド" do
         let(:user_a) { create(:user) }
@@ -93,14 +94,7 @@ RSpec.describe User, type: :model do
                 expect(user_a.followings?(user_c)).to eq false
             end
         end   
-        
-        context "feedでフォロー中のuserと自分の投稿を表示する" do
-            it 'user_aとuser_bのpostが表示される' do
-                user_a.follow(user_b)
-
-            end
-        end
-
+    
         describe 'feedの確認' do
             before do
                 user_a.follow(user_b)

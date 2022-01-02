@@ -16,11 +16,11 @@ Rails.application.routes.draw do
   get 'posts/search', to: 'posts#search'
   #userプロフィール編集用path
   namespace :mypage do
-    resources :account, only: %i[edit create]
-    resources :notification_settings, only: %i[edit update]
+    resource :account, only: %i[edit create]
+    resource :notification_setting, only: %i[edit update]
   end
 
-  resources :activities, only: [] do
+  resources :activities, only: %i[index] do
     patch :read, on: :member
   end
 

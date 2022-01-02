@@ -6,7 +6,7 @@
           h2 チャットルーム
           = link_to '参加者一覧', '#', class: 'btn btn-primary btn-raised', data: { toggle: 'modal', target: '#chatroom-users'}
         .card-body
-          ul.list-unstyled.messages-box
+          ul.list-unstyled
             = render partial: 'messages/messages', collection: @chatroom.chatroom_messages, as: 'messages'
           = render 'messages/form', chatroom: @chatroom, message:  @chatroom.chatroom_messages.new
 #chatroom-users.modal.fade tabindex="-1"

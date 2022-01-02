@@ -10,9 +10,6 @@ class ChatroomMessage < ApplicationRecord
   end
 
   def read_or_unread(read_time)
-    
-    binding.pry
-    
     confirm_read = self.created_at < read_time
     if confirm_read
       return "既読"

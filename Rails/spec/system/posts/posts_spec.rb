@@ -49,7 +49,7 @@ RSpec.describe 'ポスト', type: :system do
     end
 
 
-    describe '後進できる' do
+    describe '更新できる' do
         let(:login_user) { create(:user) }
         let(:login_user_post) { create(:post, user: login_user)}
         let(:other_user_post) { create(:post) }

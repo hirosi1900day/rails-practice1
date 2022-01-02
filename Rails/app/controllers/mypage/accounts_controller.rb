@@ -1,4 +1,4 @@
-class Mypage::AccountController < ApplicationController
+class Mypage::AccountsController < ApplicationController
     before_action :require_login
     def edit
         @user = current_user

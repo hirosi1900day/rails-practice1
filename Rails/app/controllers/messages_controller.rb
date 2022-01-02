@@ -3,8 +3,15 @@ class MessagesController < ApplicationController
     def create
         @message = current_user.chatroom_message.build(message_create)
         if @message.save
+            #通知関連
             users = Chatroom.find(params[:chatroom_id]).users_excluding(current_user)
             @message.create_activities(users)
+            #リアルタイムチャット関連
+            ActionCable.server.broadcast(
+                "chatroom_#{@message.chatroom_id}",
+                { type: :create, html: (render partial: 'messages/message', locals: { message: @message }, layout: false), message: @message.as_json }
+            )
+            head :ok
         end
     end
 

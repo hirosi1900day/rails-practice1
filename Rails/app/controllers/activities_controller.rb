@@ -5,4 +5,8 @@ class ActivitiesController < ApplicationController
         redirect_to activity.redirect_path
     end
 
+    def index
+        @activities = Activity.all.order(created_at: :desc)
+    end
+
 end

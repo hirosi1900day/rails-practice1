@@ -9,3 +9,6 @@ li.media.mb-3.border-bottom.p-2 id="message-#{message.id}" data-sender-id="#{mes
     div.text-right
       = message.decorate.created_at
       = message.read_or_unread(message.chatroom.chatroom_users.find_by(user_id: current_user.id).last_read_at)
+    div.text-right.crud-area
+      削除に
+      関して
