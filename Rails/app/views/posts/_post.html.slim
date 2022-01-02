@@ -1,7 +1,8 @@
-.card.mb-5.post
+.card.mb-5.post id="post-#{post.id}"
   .card-header
     .d-flex.align-items-center
       = post.user.name
+      = render 'posts/like_area', post: post
       - if current_user&.own?(post)
         .ml-auto
           = link_to post_path(post), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do

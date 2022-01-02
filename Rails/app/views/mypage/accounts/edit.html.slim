@@ -1,0 +1,11 @@
+= form_with model: @user, url: mypage_account_path, method: :post do |f|
+  .form-group
+    = f.label :avatar
+    = f.file_field :avatar, onchange: 'previewFileWithIn(preview)', class: 'form-control', accept: 'image/*'
+    = f.hidden_field :avatar_cache
+    = image_tag @user.avatar.url, class: 'rounded-circle container', id: 'preview', size: '100*100'
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', value: @user.name
+  = f.submit class: 'btn btn-primary btn-raised'
+end 

@@ -7,6 +7,8 @@ services:
       - ./Rails:/app
     ports:
       - 3000:3000
+    environment:
+      - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
     depends_on:
       - db 
       - redis

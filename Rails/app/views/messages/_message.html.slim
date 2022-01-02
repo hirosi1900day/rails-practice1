@@ -1,0 +1,14 @@
+li.media.mb-3.border-bottom.p-2 id="message-#{message.id}" data-sender-id="#{message.user.id}"
+  div
+    div
+      = link_to message.user.name, user_path(message.user)
+    = image_tag message.user.avatar_url, class: 'mr-3 rounded-circle', size: '50x50'
+    
+  .media-body
+    = simple_format(message.body)
+    div.text-right
+      = message.decorate.created_at
+      = message.read_or_unread(message.chatroom.chatroom_users.find_by(user_id: current_user.id).last_read_at)
+    div.text-right.crud-area
+      削除に
+      関して

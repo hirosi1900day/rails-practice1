@@ -4,9 +4,7 @@ html
     title App
     = csrf_meta_tags 
     = csp_meta_tag 
-
-    = stylesheet_pack_tag    'application' 
-    = javascript_pack_tag    'application'
+    = display_meta_tags(default_meta_tags)
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
 
