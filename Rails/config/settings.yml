@@ -1,3 +1,6 @@
+payjp:
+  pk: <%= Rails.application.credentials.payjp.dig(:pk) %>
+  sk: <%= Rails.application.credentials.payjp.dig(:sk) %>
 meta:
   site: Instaclone
   title: InstaClone - Railsの実践的アプリケーション

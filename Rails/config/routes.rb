@@ -18,6 +18,14 @@ Rails.application.routes.draw do
   namespace :mypage do
     resource :account, only: %i[edit create]
     resource :notification_setting, only: %i[edit update]
+    #決済関連
+    resources :plans, only: %i[index]
+    resources :payments, only: %i[index]
+    resources :contracts, only: %i[create]
+    resource :creditcard, only: %i[new create edit update]
+    resource :contract, only: %i[create] do
+      resource :contract_cancellation, module: :contract, path: :cancellation, only: :create
+    end
   end
 
   resources :activities, only: %i[index] do
@@ -31,10 +39,11 @@ Rails.application.routes.draw do
   resources :likes, only: %i[create destroy]
   resources :users, only: %i[new create index show]
   resources :relationships, only: %i[create destroy]
-
   resources :chatrooms, only: %i[ create index show ], shallow: true do
     resources :messages
   end
+
+  
 
 
 

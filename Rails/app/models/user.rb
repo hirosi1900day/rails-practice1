@@ -13,6 +13,7 @@
 #  salt                    :string(255)
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  customer_id             :string(255)
 #
 # Indexes
 #
@@ -20,6 +21,7 @@
 #
 class User < ApplicationRecord
   authenticates_with_sorcery!
+  include PayjpCustomer
 
   mount_uploader :avatar, AvatarUploader
   
@@ -43,7 +45,7 @@ class User < ApplicationRecord
   #chat関連
   has_many :chatroom_users, dependent: :destroy
   has_many :chatrooms, through: :chatroom_users
-  has_many :chatroom_message, dependent: :destroy
+  has_many :chatroom_messages, dependent: :destroy
   
   scope :recent, ->(count) { order(created_at: :desc).limit(count) }
 

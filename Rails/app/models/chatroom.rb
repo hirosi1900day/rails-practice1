@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: chatrooms
+#
+#  id         :bigint           not null, primary key
+#  name       :string(255)      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Chatroom < ApplicationRecord
     has_many :chatroom_messages, dependent: :destroy
     has_many :chatroom_users, dependent: :destroy
@@ -19,5 +28,4 @@ class Chatroom < ApplicationRecord
     def set_read_datetime(user)
         self.chatroom_users.find_by(user_id: user.id).update(last_read_at: Time.now)
     end
-
 end
